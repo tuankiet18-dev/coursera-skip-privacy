@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coursera Skip: Guide / Hướng dẫn</title>
+  <meta name="description" content="How to install and use the Coursera Skip Video & Reading extension. Hướng dẫn cài đặt và sử dụng tiện ích Coursera Skip." />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: rgba(30, 41, 59, 0.75);
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --accent: #818cf8;
+      --warn-bg: rgba(245, 158, 11, 0.08);
+      --warn-border: rgba(245, 158, 11, 0.4);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      background-image:
+        radial-gradient(circle at 10% 5%, rgba(99, 102, 241, 0.16) 0%, transparent 40%),
+        radial-gradient(circle at 90% 95%, rgba(16, 185, 129, 0.1) 0%, transparent 40%);
+      line-height: 1.65;
+      padding: 24px 16px 64px;
+    }
+    .wrap { max-width: 980px; margin: 0 auto; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+    h1 { font-size: 22px; letter-spacing: -0.01em; }
+    .lang {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 14px;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .lang:hover { color: #fff; background: rgba(255, 255, 255, 0.12); }
+    .layout { display: grid; grid-template-columns: 220px 1fr; gap: 24px; align-items: start; }
+    nav.toc {
+      position: sticky; top: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 13px;
+    }
+    nav.toc strong { display: block; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    nav.toc a { color: #cbd5e1; text-decoration: none; padding: 5px 8px; border-radius: 6px; }
+    nav.toc a:hover { background: rgba(255, 255, 255, 0.07); color: #fff; }
+    main { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      scroll-margin-top: 16px;
+    }
+    h2 { font-size: 18px; margin-bottom: 10px; }
+    h3 { font-size: 14px; margin: 16px 0 6px; color: #e2e8f0; }
+    p, li { font-size: 14px; color: #cbd5e1; }
+    p + p, p + ul, ul + p, ol + p, p + ol { margin-top: 10px; }
+    ul, ol { padding-left: 20px; }
+    li { margin: 4px 0; }
+    a { color: var(--accent); }
+    code, kbd {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12.5px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 1px 6px;
+    }
+    .warn {
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-top: 12px;
+    }
+    .warn strong { color: #fbbf24; }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13.5px; }
+    th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; color: #cbd5e1; }
+    th { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+    details { border-top: 1px solid var(--border); padding: 10px 0; }
+    details:first-of-type { margin-top: 8px; }
+    summary { cursor: pointer; font-weight: 600; font-size: 14px; color: #e2e8f0; }
+    details p { margin-top: 8px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 16px; border-radius: 10px;
+      font-weight: 700; font-size: 14px; text-decoration: none; color: #fff;
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      margin-top: 10px;
+    }
+    footer { text-align: center; font-size: 12px; color: var(--muted); margin-top: 24px; }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid #a5b4fc; outline-offset: 2px; }
+    [data-lang] { display: none; }
+    body.vi [data-lang="vi"], body.en [data-lang="en"] { display: block; }
+    body.vi span[data-lang="vi"], body.en span[data-lang="en"] { display: inline; }
+    nav.toc a[data-lang] { display: none; }
+    body.vi nav.toc a[data-lang="vi"], body.en nav.toc a[data-lang="en"] { display: block; }
+    @media (max-width: 760px) {
+      .layout { grid-template-columns: 1fr; }
+      nav.toc { position: static; }
+    }
+  </style>
+</head>
+<body class="vi">
+  <div class="wrap">
+    <header>
+      <h1><span data-lang="vi">Hướng dẫn sử dụng Coursera Skip</span><span data-lang="en">Coursera Skip User Guide</span></h1>
+      <button class="lang" id="lang" type="button" aria-label="Switch language">EN</button>
+    </header>
+
+    <div class="layout">
+      <nav class="toc" aria-label="Table of contents">
+        <strong><span data-lang="vi">Mục lục</span><span data-lang="en">Contents</span></strong>
+        <a data-lang="vi" href="#install">Cài đặt</a><a data-lang="en" href="#install">Install</a>
+        <a data-lang="vi" href="#start">Bắt đầu nhanh</a><a data-lang="en" href="#start">Quick start</a>
+        <a data-lang="vi" href="#buttons">Các nút làm gì</a><a data-lang="en" href="#buttons">What each button does</a>
+        <a data-lang="vi" href="#ai">Thiết lập AI (tùy chọn)</a><a data-lang="en" href="#ai">AI setup (optional)</a>
+        <a data-lang="vi" href="#trouble">Xử lý lỗi</a><a data-lang="en" href="#trouble">Troubleshooting</a>
+        <a data-lang="vi" href="#privacy">Quyền riêng tư</a><a data-lang="en" href="#privacy">Privacy</a>
+        <a data-lang="vi" href="#risk">Lưu ý quan trọng</a><a data-lang="en" href="#risk">Important notes</a>
+        <a data-lang="vi" href="#faq">Câu hỏi thường gặp</a><a data-lang="en" href="#faq">FAQ</a>
+      </nav>
+
+      <main>
+        <!-- INSTALL -->
+        <section id="install">
+          <div data-lang="vi">
+            <h2>Cài đặt</h2>
+            <ol>
+              <li>Mở trang tiện ích trên Chrome Web Store và bấm <strong>Thêm vào Chrome</strong>.</li>
+              <li>Bấm biểu tượng mảnh ghép trên thanh công cụ, rồi ghim <strong>Coursera Skip</strong> để mở nhanh.</li>
+              <li>Mở một khóa học Coursera mà bạn <strong>đã đăng ký</strong>. Bảng điều khiển nổi (widget) sẽ hiện ở góc phải dưới trang bài học.</li>
+            </ol>
+            <a class="btn" href="https://chromewebstore.google.com/detail/coursera-skip-video-read/jjbgneddmjkolgmpamecbhfgjgdiajlf" target="_blank" rel="noopener noreferrer">Chrome Web Store</a>
+          </div>
+          <div data-lang="en">
+            <h2>Install</h2>
+            <ol>
+              <li>Open the extension page on the Chrome Web Store and click <strong>Add to Chrome</strong>.</li>
+              <li>Click the puzzle-piece icon in the toolbar and pin <strong>Coursera Skip</strong> for quick access.</li>
+              <li>Open a Coursera course you are <strong>enrolled in</strong>. The floating widget appears at the bottom-right of the lesson page.</li>
+            </ol>
+            <a class="btn" href="https://chromewebstore.google.com/detail/coursera-skip-video-read/jjbgneddmjkolgmpamecbhfgjgdiajlf" target="_blank" rel="noopener noreferrer">Chrome Web Store</a>
+          </div>
+        </section>
+
+        <!-- QUICK START -->
+        <section id="start">
+          <div data-lang="vi">
+            <h2>Bắt đầu nhanh</h2>
+            <ol>
+              <li>Vào một bài học (video, bài đọc, quiz...) trong khóa học.</li>
+              <li>Widget tự nhận diện loại bài và hiện trạng thái <strong>Lesson detected</strong>.</li>
+              <li>Bấm nút phù hợp. Với bài video/bài đọc, bấm <strong>Complete Current Lesson</strong>, trang sẽ tải lại khi xong.</li>
+              <li>Bạn có thể dùng widget (kéo thả được, thu nhỏ bằng nút <code>−</code>) hoặc bấm biểu tượng tiện ích để mở popup. Hai nơi có cùng chức năng.</li>
+              <li>Đổi ngôn ngữ giao diện bằng nút <strong>EN / VI</strong>.</li>
+            </ol>
+          </div>
+          <div data-lang="en">
+            <h2>Quick start</h2>
+            <ol>
+              <li>Open a lesson (video, reading, quiz...) in your course.</li>
+              <li>The widget detects the lesson type and shows <strong>Lesson detected</strong>.</li>
+              <li>Click the matching button. For videos and readings, click <strong>Complete Current Lesson</strong>; the page reloads when done.</li>
+              <li>Use the widget (draggable, minimize with <code>−</code>) or click the extension icon to open the popup. Both offer the same actions.</li>
+              <li>Switch the interface language with the <strong>EN / VI</strong> button.</li>
+            </ol>
+          </div>
+        </section>
+
+        <!-- BUTTONS -->
+        <section id="buttons">
+          <div data-lang="vi">
+            <h2>Các nút làm gì</h2>
+            <table>
+              <thead><tr><th>Nút</th><th>Chức năng</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Complete Current Lesson</strong></td><td>Đánh dấu hoàn thành bài hiện tại (video hoặc bài đọc). Với bài thảo luận, nút này đăng một phản hồi ngắn.</td></tr>
+                <tr><td><strong>Auto Grade Peer Review</strong></td><td>Trên bài chấm chéo: tự chọn tiêu chí và điền nhận xét. Bạn <strong>phải tự xem lại và bấm nộp</strong>.</td></tr>
+                <tr><td><strong>AI Auto-Answer Quiz</strong></td><td>Trên quiz có chấm điểm: gọi AI (cần API key của bạn) để chọn đáp án, rồi đánh dấu nút Submit. Bạn <strong>phải tự kiểm tra, tích Honor Code và bấm nộp</strong>.</td></tr>
+                <tr><td><strong>Complete All Video &amp; Reading</strong></td><td>Hoàn thành hàng loạt mọi video và bài đọc trong khóa học.</td></tr>
+                <tr><td><strong>Complete All Discussions</strong></td><td>Đăng phản hồi cho mọi bài thảo luận trong khóa học (bỏ qua những bài tiện ích đã đăng trước đó).</td></tr>
+              </tbody>
+            </table>
+            <div class="warn"><strong>Xác nhận hàng loạt:</strong> hai nút "Complete All" sẽ hỏi xác nhận lần đầu, vì chúng tác động lên toàn bộ khóa học và không hoàn tác được từ tiện ích. Thanh tiến trình hiện trong lúc chạy; đừng đóng tab đến khi xong.</div>
+          </div>
+          <div data-lang="en">
+            <h2>What each button does</h2>
+            <table>
+              <thead><tr><th>Button</th><th>What it does</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Complete Current Lesson</strong></td><td>Marks the current lesson (video or reading) as completed. On a discussion prompt, it posts a short reply.</td></tr>
+                <tr><td><strong>Auto Grade Peer Review</strong></td><td>On a peer-review page: selects criteria and fills in comments. You <strong>must review and submit it yourself</strong>.</td></tr>
+                <tr><td><strong>AI Auto-Answer Quiz</strong></td><td>On a graded quiz: asks an AI (needs your own API key) to pick answers, then highlights Submit. You <strong>must verify, accept the Honor Code and submit yourself</strong>.</td></tr>
+                <tr><td><strong>Complete All Video &amp; Reading</strong></td><td>Bulk-completes every video and reading in the course.</td></tr>
+                <tr><td><strong>Complete All Discussions</strong></td><td>Posts a reply on every discussion prompt in the course (skipping ones the extension already posted).</td></tr>
+              </tbody>
+            </table>
+            <div class="warn"><strong>Bulk confirmation:</strong> the two "Complete All" buttons ask for confirmation the first time, because they affect the whole course and cannot be undone from the extension. A progress bar shows while running; keep the tab open until it finishes.</div>
+          </div>
+        </section>
+
+        <!-- AI SETUP -->
+        <section id="ai">
+          <div data-lang="vi">
+            <h2>Thiết lập AI (tùy chọn)</h2>
+            <p>Chỉ cần cho nút <strong>AI Auto-Answer Quiz</strong>. Tiện ích không có máy chủ riêng: bạn tự đưa API key của nhà cung cấp AI, và key chỉ lưu trên máy bạn.</p>
+            <ol>
+              <li>Bấm biểu tượng bánh răng ở widget (hoặc popup) để mở <strong>AI Settings</strong>.</li>
+              <li>Chọn nhà cung cấp: <strong>Gemini</strong>, <strong>OpenAI</strong> hoặc <strong>Groq</strong>.</li>
+              <li>Dán API key vào ô nhập rồi bấm <strong>Save</strong>. Có thể bấm <strong>Paste</strong> để dán nhanh.</li>
+            </ol>
+            <h3>Lấy API key</h3>
+            <ul>
+              <li><strong>Gemini</strong>: <a href="https://aistudio.google.com" target="_blank" rel="noopener noreferrer">aistudio.google.com</a> (có gói miễn phí giới hạn).</li>
+              <li><strong>Groq</strong>: <a href="https://console.groq.com" target="_blank" rel="noopener noreferrer">console.groq.com</a> (có gói miễn phí giới hạn).</li>
+              <li><strong>OpenAI</strong>: <a href="https://platform.openai.com" target="_blank" rel="noopener noreferrer">platform.openai.com</a> (trả phí theo mức dùng).</li>
+            </ul>
+            <p>Chất lượng đáp án phụ thuộc vào model và câu hỏi, và AI có thể sai. Luôn kiểm tra lại trước khi nộp.</p>
+          </div>
+          <div data-lang="en">
+            <h2>AI setup (optional)</h2>
+            <p>Only needed for <strong>AI Auto-Answer Quiz</strong>. The extension has no server of its own: you supply your own AI provider API key, and it is stored only on your device.</p>
+            <ol>
+              <li>Click the gear icon in the widget (or popup) to open <strong>AI Settings</strong>.</li>
+              <li>Pick a provider: <strong>Gemini</strong>, <strong>OpenAI</strong> or <strong>Groq</strong>.</li>
+              <li>Paste the API key and click <strong>Save</strong>. <strong>Paste</strong> pastes from the clipboard.</li>
+            </ol>
+            <h3>Getting an API key</h3>
+            <ul>
+              <li><strong>Gemini</strong>: <a href="https://aistudio.google.com" target="_blank" rel="noopener noreferrer">aistudio.google.com</a> (limited free tier).</li>
+              <li><strong>Groq</strong>: <a href="https://console.groq.com" target="_blank" rel="noopener noreferrer">console.groq.com</a> (limited free tier).</li>
+              <li><strong>OpenAI</strong>: <a href="https://platform.openai.com" target="_blank" rel="noopener noreferrer">platform.openai.com</a> (pay as you go).</li>
+            </ul>
+            <p>Answer quality depends on the model and the question, and the AI can be wrong. Always verify before submitting.</p>
+          </div>
+        </section>
+
+        <!-- TROUBLESHOOTING -->
+        <section id="trouble">
+          <div data-lang="vi">
+            <h2>Xử lý lỗi</h2>
+            <details open><summary>Widget không hiện</summary><p>Widget chỉ hiện trên trang có địa chỉ chứa <code>/learn/</code>. Tải lại trang (F5). Nếu vẫn không thấy, kiểm tra tiện ích đang bật ở <code>chrome://extensions</code>.</p></details>
+            <details><summary>"Please open a Coursera lesson page" hoặc "Permission denied"</summary><p>Hãy mở đúng một bài học trong khóa bạn đã đăng ký và đã đăng nhập Coursera. Khóa chưa đăng ký sẽ bị từ chối.</p></details>
+            <details><summary>Gemini báo HTTP 503 "high demand"</summary><p>Máy chủ của Google đang quá tải, đây là lỗi tạm thời. Chờ vài phút rồi thử lại, hoặc chuyển sang thẻ Groq/OpenAI trong AI Settings. Phiên bản mới tự thử model dự phòng.</p></details>
+            <details><summary>Lỗi 429 hoặc "quota"</summary><p>Bạn đã dùng hết hạn mức của gói API. Chờ đặt lại hạn mức hoặc đổi nhà cung cấp.</p></details>
+            <details><summary>Lỗi 401/403 khi dùng AI</summary><p>API key sai hoặc đã bị thu hồi. Bấm <strong>Delete key</strong>, dán lại key mới.</p></details>
+            <details><summary>Complete All Discussions báo một số bài thất bại</summary><p>Thông báo cuối cho biết nguyên nhân (ví dụ <code>post HTTP 403</code>). Thử tải lại trang rồi chạy lại. Những bài đã đăng thành công sẽ được bỏ qua ở lần sau.</p></details>
+            <details><summary>Quiz AI để lại khoảng trắng hoặc trang bị cuộn lạ</summary><p>Bản mới chỉ cuộn đủ để thấy nút Submit. Nếu vẫn gặp, tải lại trang và báo lỗi kèm ảnh chụp.</p></details>
+            <details><summary>Trang Coursera báo lỗi đỏ trong Console (F12)</summary><p>Các lỗi như <code>Cannot read properties of undefined (reading 'M_ID')</code> là lỗi của chính trang Coursera, không phải của tiện ích. Chỉ các dòng bắt đầu bằng <code>[CourseraSkip]</code> là của tiện ích.</p></details>
+          </div>
+          <div data-lang="en">
+            <h2>Troubleshooting</h2>
+            <details open><summary>The widget does not appear</summary><p>The widget only shows on pages whose address contains <code>/learn/</code>. Reload the page (F5). If it still does not show, make sure the extension is enabled at <code>chrome://extensions</code>.</p></details>
+            <details><summary>"Please open a Coursera lesson page" or "Permission denied"</summary><p>Open an actual lesson in a course you are enrolled in, while signed in to Coursera. Courses you are not enrolled in are rejected.</p></details>
+            <details><summary>Gemini shows HTTP 503 "high demand"</summary><p>Google's servers are overloaded; this is temporary. Wait a few minutes and retry, or switch to the Groq/OpenAI tab in AI Settings. Newer versions automatically try fallback models.</p></details>
+            <details><summary>Error 429 or "quota"</summary><p>You have used up your API plan's quota. Wait for it to reset or switch provider.</p></details>
+            <details><summary>401/403 errors with AI</summary><p>The API key is wrong or revoked. Click <strong>Delete key</strong> and paste a new one.</p></details>
+            <details><summary>Complete All Discussions reports some failures</summary><p>The final message names the cause (for example <code>post HTTP 403</code>). Reload the page and run it again. Items already posted successfully are skipped next time.</p></details>
+            <details><summary>AI quiz leaves blank space or scrolls oddly</summary><p>Newer versions only scroll enough to reveal the Submit button. If you still see it, reload the page and report it with a screenshot.</p></details>
+            <details><summary>Red errors in the browser Console (F12) from Coursera</summary><p>Errors like <code>Cannot read properties of undefined (reading 'M_ID')</code> come from Coursera's own page, not from the extension. Only lines starting with <code>[CourseraSkip]</code> belong to the extension.</p></details>
+          </div>
+        </section>
+
+        <!-- PRIVACY -->
+        <section id="privacy">
+          <div data-lang="vi">
+            <h2>Quyền riêng tư</h2>
+            <ul>
+              <li>Tiện ích <strong>không có máy chủ riêng</strong>, không thu thập hay gửi dữ liệu cá nhân cho tác giả.</li>
+              <li>API key và cài đặt chỉ lưu trong bộ nhớ cục bộ của trình duyệt.</li>
+              <li>Khi dùng AI, câu hỏi quiz được gửi thẳng từ trình duyệt của bạn tới nhà cung cấp bạn chọn (Google, OpenAI hoặc Groq).</li>
+              <li>Chi tiết đầy đủ: <a href="./">Chính sách quyền riêng tư</a>.</li>
+            </ul>
+          </div>
+          <div data-lang="en">
+            <h2>Privacy</h2>
+            <ul>
+              <li>The extension has <strong>no server of its own</strong> and does not collect or send personal data to the author.</li>
+              <li>API keys and settings are stored only in your browser's local storage.</li>
+              <li>When you use AI, quiz questions are sent directly from your browser to the provider you chose (Google, OpenAI or Groq).</li>
+              <li>Full details: <a href="./">Privacy Policy</a>.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- RISK -->
+        <section id="risk">
+          <div data-lang="vi">
+            <h2>Lưu ý quan trọng</h2>
+            <p>Đây là công cụ độc lập, <strong>không liên kết, không được Coursera cho phép hay bảo trợ</strong>. Việc dùng nó có thể trái với điều khoản dịch vụ và Honor Code của Coursera.</p>
+            <div class="warn">
+              <p><strong>Rủi ro:</strong> Coursera ghi rõ trên trang nộp bài rằng bài làm bằng công cụ AI có thể dẫn đến <strong>trượt khóa học hoặc khóa tài khoản</strong>. Trường, nhà tuyển dụng hoặc chứng chỉ của bạn cũng có thể bị ảnh hưởng. Bạn tự chịu trách nhiệm khi sử dụng.</p>
+            </div>
+            <p>Hãy dùng tiện ích để tiết kiệm thời gian cho những nội dung bạn đã nắm, và học thật những phần quan trọng với bạn.</p>
+          </div>
+          <div data-lang="en">
+            <h2>Important notes</h2>
+            <p>This is an independent tool, <strong>not affiliated with, authorized or sponsored by Coursera</strong>. Using it may violate Coursera's Terms of Service and Honor Code.</p>
+            <div class="warn">
+              <p><strong>Risk:</strong> Coursera states on submission pages that work produced with AI tools may result in <strong>course failure or account deactivation</strong>. Your school, employer or certificate may also be affected. You use it at your own risk.</p>
+            </div>
+            <p>Use the extension to save time on material you already know, and actually learn the parts that matter to you.</p>
+          </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq">
+          <div data-lang="vi">
+            <h2>Câu hỏi thường gặp</h2>
+            <details><summary>Tiện ích có miễn phí không?</summary><p>Có. Toàn bộ tính năng hiện đều miễn phí. Nút ủng hộ là hoàn toàn tùy chọn.</p></details>
+            <details><summary>Tôi cần tài khoản hay đăng ký gì không?</summary><p>Không. Chỉ cần đăng nhập Coursera. Riêng tính năng AI cần API key của bạn.</p></details>
+            <details><summary>Dùng được trên trình duyệt nào?</summary><p>Chrome và các trình duyệt dựa trên Chromium hỗ trợ tiện ích Chrome (Edge, Brave...).</p></details>
+            <details><summary>Có báo lỗi hay góp ý ở đâu?</summary><p>Qua trang Issues của dự án (liên kết trong chính sách quyền riêng tư) hoặc email ghi trong đó. Khi báo lỗi, hãy kèm loại bài, thông báo hiện ra, và các dòng <code>[CourseraSkip]</code> trong Console (đã xóa thông tin cá nhân).</p></details>
+          </div>
+          <div data-lang="en">
+            <h2>FAQ</h2>
+            <details><summary>Is it free?</summary><p>Yes. All features are currently free. The donate button is entirely optional.</p></details>
+            <details><summary>Do I need an account or sign-up?</summary><p>No. You only need to be signed in to Coursera. The AI feature needs your own API key.</p></details>
+            <details><summary>Which browsers work?</summary><p>Chrome and Chromium-based browsers that support Chrome extensions (Edge, Brave...).</p></details>
+            <details><summary>Where do I report bugs or give feedback?</summary><p>Through the project's Issues page (linked from the privacy policy) or the email listed there. Please include the lesson type, the message shown, and the <code>[CourseraSkip]</code> lines from the Console (with personal info removed).</p></details>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer>
+      <span data-lang="vi">Tiện ích độc lập, không liên kết với Coursera Inc.</span>
+      <span data-lang="en">Independent tool, not affiliated with Coursera Inc.</span>
+      · <a href="donate.html">☕ <span data-lang="vi">Ủng hộ</span><span data-lang="en">Support</span></a>
+      · <a href="./"><span data-lang="vi">Quyền riêng tư</span><span data-lang="en">Privacy</span></a>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      let lang = 'vi';
+      try { lang = localStorage.getItem('guide_lang') || ''; } catch (_) {}
+      if (lang !== 'vi' && lang !== 'en') {
+        lang = (navigator.language || '').toLowerCase().startsWith('vi') ? 'vi' : 'en';
+      }
+      function apply() {
+        document.body.className = lang;
+        document.documentElement.lang = lang;
+        document.getElementById('lang').textContent = lang === 'vi' ? 'EN' : 'VI';
+        document.title = lang === 'vi' ? 'Hướng dẫn Coursera Skip' : 'Coursera Skip Guide';
+      }
+      document.getElementById('lang').addEventListener('click', function () {
+        lang = lang === 'vi' ? 'en' : 'vi';
+        try { localStorage.setItem('guide_lang', lang); } catch (_) {}
+        apply();
+      });
+      apply();
+    })();
+  </script>
+</body>
+</html>
