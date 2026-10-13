@@ -77,6 +77,23 @@
       background: #fff;
       padding: 8px;
     }
+
+    /* Shared site navigation */
+    .site-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin-bottom: 18px; }
+    .site-nav a {
+      color: #cbd5e1; text-decoration: none; font-size: 13px; font-weight: 600;
+      padding: 6px 12px; border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(255, 255, 255, 0.04);
+    }
+    .site-nav a:hover { background: rgba(255, 255, 255, 0.1); color: #fff; text-decoration: none; }
+    .site-nav a[aria-current="page"] { color: #fff; border-color: rgba(129, 140, 248, 0.6); background: rgba(99, 102, 241, 0.2); }
+    .site-nav .donate-pill {
+      margin-left: auto; color: #1f2937; border: none;
+      background: linear-gradient(135deg, #fde047 0%, #f59e0b 100%);
+      box-shadow: 0 2px 12px rgba(245, 158, 11, 0.45);
+    }
+    .site-nav .donate-pill:hover { color: #111827; filter: brightness(1.08); box-shadow: 0 4px 16px rgba(245, 158, 11, 0.6); }
+    .site-nav .donate-pill[aria-current="page"] { color: #111827; background: linear-gradient(135deg, #fde047 0%, #f59e0b 100%); }
     footer { text-align: center; font-size: 12px; color: var(--muted); }
     footer a { color: var(--accent); }
     a:focus-visible, button:focus-visible { outline: 2px solid #a5b4fc; outline-offset: 2px; }
@@ -85,6 +102,13 @@
 </head>
 <body>
   <main>
+    <nav class="site-nav" aria-label="Site">
+      <a href="#" id="back">← <span data-i18n="navBack">Back</span></a>
+      <a href="guide.html" data-i18n="navGuide">Guide</a>
+      <a href="./" data-i18n="navPrivacy">Privacy</a>
+      <a class="donate-pill" href="donate.html" aria-current="page">☕ <span data-i18n="navDonate">Support</span></a>
+    </nav>
+
     <header>
       <h1 data-i18n="title">Support Coursera Skip</h1>
       <button class="lang" id="lang" type="button" aria-label="Switch language">VI</button>
@@ -123,6 +147,7 @@
     const I18N = {
       en: {
         title: 'Support Coursera Skip',
+        navBack: 'Back', navGuide: 'Guide', navPrivacy: 'Privacy', navDonate: 'Support',
         intro: "Coursera Skip is a free, open-source productivity extension. Everything in it stays free. If it saved you time and you'd like to chip in, you can support the author below. It is entirely optional.",
         intlTitle: 'International (card / PayPal)',
         kofiBtn: 'Support on Ko-fi',
@@ -136,6 +161,7 @@
       },
       vi: {
         title: 'Ủng hộ Coursera Skip',
+        navBack: 'Quay lại', navGuide: 'Hướng dẫn', navPrivacy: 'Quyền riêng tư', navDonate: 'Ủng hộ',
         intro: 'Coursera Skip là tiện ích mã nguồn mở miễn phí, mọi tính năng đều dùng miễn phí. Nếu tiện ích giúp bạn tiết kiệm thời gian và bạn muốn góp một chút, bạn có thể ủng hộ tác giả bên dưới. Hoàn toàn tùy ý.',
         intlTitle: 'Quốc tế (thẻ / PayPal)',
         kofiBtn: 'Ủng hộ qua Ko-fi',
@@ -177,6 +203,13 @@
     }
 
     render();
+
+    // "Back": go back in history when we came from another page of this site, else to the guide
+    document.getElementById('back').addEventListener('click', function (e) {
+      e.preventDefault();
+      var sameSite = document.referrer && document.referrer.indexOf(location.origin) === 0 && history.length > 1;
+      if (sameSite) history.back(); else location.href = 'guide.html';
+    });
   </script>
 </body>
 </html>
